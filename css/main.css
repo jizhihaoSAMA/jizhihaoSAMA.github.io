@@ -1765,7 +1765,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff4aff;
+  background: #f0f;
 }
 .feed-link,
 .chat {
@@ -2711,8 +2711,9 @@ hr {
   border-radius: 100%;
   opacity: 1;
 }
-.site-author-image:hover {
-  background: url("https://s2.ax1x.com/2019/04/10/ATZWjI.jpg");
-  opacity: 0;
-  border: 0px;
+.sidebar sidebar-active {
+  float: left;
+}
+.sidebar-toggle {
+  float: left;
 }
