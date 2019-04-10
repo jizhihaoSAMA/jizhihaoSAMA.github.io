@@ -1765,7 +1765,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #f0f;
+  background: #c1130d;
 }
 .feed-link,
 .chat {
@@ -2710,6 +2710,19 @@ hr {
   background: url("https://s2.ax1x.com/2019/04/06/AWDFv8.jpg");
   border-radius: 100%;
   opacity: 1;
+}
+body {
+  background: url("https://source.unsplash.com/random/1600x900");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+}
+.main-inner {
+  margin-top: 60px;
+  padding: 60px 60px 60px 60px;
+  background: #6cf;
+  opacity: 0.8;
+  min-height: 500px;
 }
 .sidebar sidebar-active {
   float: left;
