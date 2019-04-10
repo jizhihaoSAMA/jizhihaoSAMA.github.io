@@ -1765,7 +1765,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffe7ff;
+  background: #55a19c;
 }
 .feed-link,
 .chat {
@@ -2712,10 +2712,10 @@ hr {
   opacity: 1;
 }
 body {
-  background: url("https://imgchr.com/i/AT6bi6");
+  background: url("https://s2.ax1x.com/2019/04/10/AT6bi6.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position: 100% 100%;
+  background-position: 50% 20%;
 }
 .main-inner {
   margin-top: 60px;
@@ -2723,4 +2723,11 @@ body {
   background: #fff;
   opacity: 0.8;
   min-height: 500px;
+}
+.header {
+  opacity: 0.8;
+}
+.footer {
+  opacity: 0.8;
+  z-index: -9;
 }
