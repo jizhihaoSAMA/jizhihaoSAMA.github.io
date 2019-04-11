@@ -1765,7 +1765,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #fff;
+  background: #ff4405;
 }
 .feed-link,
 .chat {
@@ -2729,7 +2729,6 @@ body {
 }
 .footer {
   opacity: 0.8;
-  z-index: -9;
 }
 .live2d-widget-container {
   opacity: 0.8;
