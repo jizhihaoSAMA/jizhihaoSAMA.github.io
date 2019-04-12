@@ -1765,7 +1765,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff4405;
+  background: #ff8ed9;
 }
 .feed-link,
 .chat {
@@ -2706,11 +2706,6 @@ hr {
     text-align: center;
   }
 }
-.site-author-image {
-  background: url("https://s2.ax1x.com/2019/04/06/AWDFv8.jpg");
-  border-radius: 100%;
-  opacity: 1;
-}
 body {
   background: url("https://s2.ax1x.com/2019/04/10/AT6bi6.jpg");
   background-repeat: no-repeat;
@@ -2729,10 +2724,4 @@ body {
 }
 .footer {
   opacity: 0.8;
-}
-.live2d-widget-container {
-  opacity: 0.8;
-}
-.live2d-widget-coutainer:hover {
-  opacity: 1;
 }
