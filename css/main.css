@@ -1731,6 +1731,7 @@ pre .javascript .function {
   height: auto;
   border: 2px solid #333;
   opacity: 1;
+  border-radius: 100%;
 }
 .site-author-name {
   margin: 5px 0 0;
@@ -1765,7 +1766,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff8ed9;
+  background: #edcf4f;
 }
 .feed-link,
 .chat {
@@ -2724,4 +2725,11 @@ body {
 }
 .footer {
   opacity: 0.8;
+}
+.live2d-widget-container {
+  opacity: 0.8 !important;
+  right: -20px !important;
+}
+.site-author-image {
+  opacity: 1 !important;
 }
