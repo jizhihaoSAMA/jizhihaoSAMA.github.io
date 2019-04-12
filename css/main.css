@@ -1766,7 +1766,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #edcf4f;
+  background: #4e869c;
 }
 .feed-link,
 .chat {
@@ -2727,7 +2727,7 @@ body {
   opacity: 0.8;
 }
 .live2d-widget-container {
-  opacity: 0.8 !important;
+  opacity: 0.9 !important;
   right: -20px !important;
 }
 .site-author-image {
