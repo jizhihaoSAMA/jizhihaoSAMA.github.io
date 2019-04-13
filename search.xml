@@ -4,6 +4,10 @@
     <title><![CDATA[python简单的图片爬去以及批量下载]]></title>
     <url>%2F2019%2F04%2F14%2Fpython%E5%9B%BE%E7%89%87%E7%88%AC%E5%8F%96%E5%92%8C%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BD%2F</url>
     <content type="text"><![CDATA[&emsp;&emsp;好久没学习爬虫了，于是天天浮躁搭博客，现在学习下载文件试试，今天就试了试下载图片，SADE，开始吧。d(`･∀･)b。 &emsp;&emsp;我是以谭文弟弟的博客为例子，这个B标签太多了内容太难提取了，我于是打算下载他博客中所有图片，我们先进入这个B的博客页面，按下F12查看源，可以得到页面的html代码，额，这里只爬取图片所以很简单图片嘛，我们只需要在标签的&lt;img src=&quot;x&quot;&gt;可以知道图片的url，那么我们先用表达式匹配所有x中的内容。 （一）利用正则表达式（还能用xpath，css选择器等方法）筛选出图片的url&emsp;&emsp;重要的地方来了，仅从字符串来看，我们只需要匹配src=”（第一个引号） 到 “&gt;（第二个引号）前，我们只需获取x的字符串，于是我们可以使用正则表达式的零宽断言，正则表达式应为：(?&lt;=src=&quot;).*(?=&quot;&gt;)。 （二）在筛选出url之后下载图片文件&emsp;&emsp;这里要用到文件编程IO的知识，图片应该以二进制方式打开，打开下载的路径并以打开方式为wb+。1with open(path,&apos;wb+&apos;) as f: 这里处理之后f就是一个文件变量（本人自己定义的），该变量有write函数，就是字面意思，写。当我们筛选出图片的url后，又要再次利用request.get(url)进行下载，然后再通过该response对象的.content对象（.content是二进制数据，.text是文本格式，由于图片是二进制，所以这里要用content）。 （三）关于下载文件的命名问题&emsp;&emsp;这里直接按照爬取后的顺序下载进行编号，对下载文件进行下载名字应该不能重复，不然最后应该只会保存最后一张图片（理论上来说）,所以在打开文件的时候，此时的路径就是存储的路径，打开的某.jpg（.png等图片格式都行，下载之后都会按照这种格式保存，由此都可以），比如这里可以在外面设置一个变量，然后每执行一次for循环就+1，之前我有这种思路但代码不知道怎么写，百度了一下，可以用引号与加法的结合，于是，成功啦(,,・ω・,,)。 这里是本人的代码哟，可以参考一下~123456789101112import requestsimport relan = requests.get(&quot;https://firstkaixin.github.io/2019/03/18/%E4%B8%80%E5%88%B0%E5%BC%B1%E7%B1%BB%E5%9E%8B%E6%AF%94%E8%BE%83%E7%9A%84%E9%A2%98%E7%9B%AE/#more&quot;)html = lan.textimghtml = re.compile(r&apos;(?&lt;=content=&quot;).+png(?=&quot;)&apos;)c = imghtml.findall(html) #返回一个匹配正则表达式字符串的所有的列表count = 0for i in c: imgdl = requests.get(i) #可以理解为获取下载链接 with open(&apos;F:\img&apos;+str(count)+&apos;.png&apos;,&apos;wb+&apos;) as f: #存储图片的路径和名字 f.write(imgdl.content) #以二进制写入文件 count+=1;]]></content>
+      <tags>
+        <tag>python</tag>
+        <tag>爬虫</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[美化博客]]></title>
