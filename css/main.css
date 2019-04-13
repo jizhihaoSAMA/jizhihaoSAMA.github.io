@@ -1731,7 +1731,6 @@ pre .javascript .function {
   height: auto;
   border: 2px solid #333;
   opacity: 1;
-  border-radius: 100%;
 }
 .site-author-name {
   margin: 5px 0 0;
@@ -1766,7 +1765,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff331c;
+  background: #7795ff;
 }
 .feed-link,
 .chat {
@@ -2732,4 +2731,16 @@ body {
 }
 .site-author-image {
   opacity: 1 !important;
+}
+.site-author-image {
+  opacity: 1 !important;
+}
+.site-author-image:hover {
+  opacity: 0 !important;
+}
+.site-author {
+  background: url("https://s2.ax1x.com/2019/04/10/ATZWjI.jpg");
+  background-size: 32% 47.7%;
+  background-repeat: no-repeat;
+  background-position: 49.7% 4%;
 }
