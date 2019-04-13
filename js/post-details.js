@@ -25,6 +25,7 @@ $(document).ready(function() {
       .on('clear.bs.scrollspy', removeCurrentActiveClass);
 
     $('body').scrollspy({ target: tocSelector });
+		
   }
 
   initScrollSpy();
