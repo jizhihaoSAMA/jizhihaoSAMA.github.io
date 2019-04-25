@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/23png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/23.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/23.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="&amp;emsp;&amp;emsp;这里直接爬取的是有道翻译。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python自制翻译软件的详细过程。（requests+tkinter+pyinstaller）">
+<meta property="og:url" content="http://yoursite.com/2019/04/25/python自制翻译软件的详细过程。（requests+tkinter+pyinstaller）/index.html">
+<meta property="og:site_name" content="SAMA&#39;s blog">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;这里直接爬取的是有道翻译。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190425131359693.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190425131657347.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190425132431406.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190425133922749.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190425152202929.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190425152530578.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-04-25T07:39:47.667Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python自制翻译软件的详细过程。（requests+tkinter+pyinstaller）">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;这里直接爬取的是有道翻译。">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190425131359693.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/04/25/python自制翻译软件的详细过程。（requests+tkinter+pyinstaller）/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python自制翻译软件的详细过程。（requests+tkinter+pyinstaller） | SAMA's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SAMA's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-python,爬虫" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/25/python自制翻译软件的详细过程。（requests+tkinter+pyinstaller）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jizhihaoSAMA">
+      <meta itemprop="description" content="It is just a blog,which is belongs to jizhihaoSAMA. XD">
+      <meta itemprop="image" content="https://s2.ax1x.com/2019/04/06/AWDFv8.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SAMA's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python自制翻译软件的详细过程。（requests+tkinter+pyinstaller）
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-25 15:35:34 / 修改时间：15:39:47" itemprop="dateCreated datePublished" datetime="2019-04-25T15:35:34+08:00">2019-04-25</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">4.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">4 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&emsp;&emsp;这里直接爬取的是有道翻译。<br><a id="more"></a></p>
+<h1 id="第一步：利用requests库爬取有道翻译"><a href="#第一步：利用requests库爬取有道翻译" class="headerlink" title="第一步：利用requests库爬取有道翻译"></a>第一步：利用requests库爬取有道翻译</h1><p>&emsp;&emsp;<font size="5" color="red">有两种解决网站反爬的措施：<br><br>&emsp;&emsp;1、直接暴力破解有道翻译的salt，sign，ts，bv值。<br><br>&emsp;&emsp;2、修改url绕过反爬。</font></p>
+<p>&emsp;&emsp;在有道页面按下F12并刷新，随便输入一句话进行翻译，可以在network项里面发现一个名为translate….什么的，打开其response项，可以发现我输入的话和翻译。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190425131359693.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>看headers里面的data：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190425131657347.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>可以看到 i 后面的就是你输入的东西，至于红圈里面的东西，就是网站反爬所用的。我这里只讲绕过反爬的url，如果想暴力破解的，可以参考<font size="5"><a href="https://blog.csdn.net/levon2018/article/details/80343531" target="_blank" rel="noopener">这篇博客</a></font></p>
+<p>然后就可以利用headers=header来模拟浏览器了。将这里面的request headers里面的内容全部复制一遍，并加上引号。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190425132431406.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<font size="5">坑了我好久的一个坑(☍﹏⁰。) ：将request headers里面的Content-Type属性也复制进去，导致只能输入英文，输入其他语言文字结果返回的是’???’。</font>
+
+<p>我也不知道为什么这里返回会有问题。当时我也是想了很久，试了下日文也是’???’，搞不懂为什么返回的是问号，我拿别人的代码可以用，但我的就不行，我对比了一下，代码没有什么错误，大致是一样的。但我发现他的headers以及data里面和我不一样，于是我就试试把headers里面的代码一行行删掉进行尝试，最终发现是Content-Type属性搞的鬼(╯‵□′)╯︵┴─┴，去掉这行后结果就正常了。（我猜应该是这个属性限制了输入的文本，也就是只能识别英文，输入其他语言的文字不识别乱码则输入进去的时候就输入的是’???’，所以返回的就是’???’）。</p>
+<p>爬取什么的还是和一般爬虫的思路一样，不过这里要注意了，url不能简单的使用有道翻译的原网站：<a href="http://fanyi.youdao.com/" target="_blank" rel="noopener">http://fanyi.youdao.com/</a> 。原网站使用了反爬，我这里找到了两个可以绕过爬虫的url：<br>1、<a href="http://fanyi.youdao.com/translate" target="_blank" rel="noopener">http://fanyi.youdao.com/translate</a> 。这个网站点进去还是会跳到有道翻译的网站去，但按F12发现该网站是一个301重定向的状态，也就是进入该网站还是会自动跳到有道翻译的网站，但这样却能直接跳过网站的反爬，真神奇。（我也不知道怎么解释（¯﹃¯），不过得出一个结论，（大概吧）如果网站反爬的话，可以通过能定向到该网站的url进行爬虫可以绕过反爬措施。）<br>2、也是在该translate……下可以找到翻译的url，直接复制后，去掉translate后面的’_o’字符也可以绕过反爬。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190425133922749.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>这里的部分代码如下，返回的是翻译的结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">trans = input()</span><br><span class="line">data=&#123;</span><br><span class="line">	&apos;i&apos;:trans,</span><br><span class="line">	......</span><br><span class="line">&#125;</span><br><span class="line">header=&#123;</span><br><span class="line">        &apos;User-Agent&apos;:&apos;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36&apos;,</span><br><span class="line">        ......</span><br><span class="line">&#125;</span><br><span class="line">url = &apos;http://fanyi.youdao.com/translate?smartresult=dict&amp;smartresult=rule&apos;</span><br><span class="line">response = requests.post(url,headers=header,data=data)</span><br><span class="line">a = response.json()</span><br><span class="line">translation = a[&apos;translateResult&apos;][0][0][&apos;tgt&apos;]</span><br><span class="line">print(translation)</span><br></pre></td></tr></table></figure></p>
+<h1 id="第二步：利用tkinter做界面。"><a href="#第二步：利用tkinter做界面。" class="headerlink" title="第二步：利用tkinter做界面。"></a>第二步：利用tkinter做界面。</h1><p>这里都是些基本操作，tkinter的基础就能做出来。不过要知道以下知识：<br>①text文本框有一个state，有disabled（只读）和normal（可读可写）两种属性，要翻译的文本框可以不用设置state，翻译的结果就设置disabled。顺便还可以给它加一个背景颜色。’#ccc’更加生动（吃了文化的亏，不知道怎么形容了）。<br>②在定义完后要把东西放进去，有3种方法：pack（），grid（），place（）。推荐使用grid（）方法，关于区别，可以看<font size="5"><a href="https://blog.csdn.net/yingshukun/article/details/53983812" target="_blank" rel="noopener">这篇博客</a></font></p>
+<h1 id="第三步：利用pyinstaller打包成exe文件。"><a href="#第三步：利用pyinstaller打包成exe文件。" class="headerlink" title="第三步：利用pyinstaller打包成exe文件。"></a>第三步：利用pyinstaller打包成exe文件。</h1><font size="5">这里安装坑也多。</font><br>详见<font size="5"><a href="https://blog.csdn.net/weixin_43849588/article/details/89464031" target="_blank" rel="noopener">这篇我之前写的博客</a></font>。<br><br>安装完成后。在cmd中输入<code>cd 你的.py文件所在的目录</code>。<br>然后输入<code>pyinstaller -F -w xxx.py</code>（-w是为了不显示dos窗口）等待一段时间，就打包完成啦。exe就在目标目录下的dist文件夹下。<br>也许你会觉得图标有点丑，我这里有一个教程，详见<font size="5"><a href="https://blog.csdn.net/lion_cui/article/details/51329497" target="_blank" rel="noopener">这篇博客</a></font><br><font size="4" color="red">对了，如果你应用图标后发现图标并没有变，你就可以把他移动一下（比如把它复制到桌面或者其他路径都可以），图标就变了。</font>
+
+<p>这里贴上我的源代码吧<em>(:3 」∠ )</em>(……里面就是data和header里面的参数，这里略过了)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import tkinter</span><br><span class="line">def en2zh():</span><br><span class="line">    trans = textbef.get(&apos;0.0&apos;,&apos;end&apos;)</span><br><span class="line">    data = &#123;</span><br><span class="line">        &apos;i&apos;:trans,</span><br><span class="line">        &apos;......</span><br><span class="line">    &#125;</span><br><span class="line">    header = &#123;</span><br><span class="line">        &apos;User-Agent&apos;:&apos;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36&apos;,</span><br><span class="line">        ......</span><br><span class="line">    &#125;</span><br><span class="line">    url = &apos;http://fanyi.youdao.com/translate?smartresult=dict&amp;smartresult=rule&apos;</span><br><span class="line">    response = requests.post(url,headers=header,data=data)</span><br><span class="line">    a = response.json()</span><br><span class="line">    translation = a[&apos;translateResult&apos;][0][0][&apos;tgt&apos;]</span><br><span class="line">    textaft[&apos;state&apos;]=&apos;normal&apos;</span><br><span class="line">    textaft.delete(1.0,&apos;end&apos;)</span><br><span class="line">    textaft.insert(&apos;end&apos;,translation)</span><br><span class="line">    textaft[&apos;state&apos;] = &apos;disabled&apos;</span><br><span class="line"></span><br><span class="line">windows = tkinter.Tk()</span><br><span class="line">windows.title(&quot;jizhihaoSAMA&apos;s Translation？not really!&quot;)</span><br><span class="line">windows.geometry(&apos;710x300&apos;)</span><br><span class="line">welc = tkinter.Label(windows,text=&quot;Let&apos;s start!&quot;,font=(&apos;Georgia&apos;,28))</span><br><span class="line">welc.grid(row=0,columnspan=3)</span><br><span class="line">textbef = tkinter.Text(width=40,height=10)</span><br><span class="line">textbef.grid(row=2,column=0)</span><br><span class="line">en2zhbutton = tkinter.Button(activebackground=&apos;#ccc&apos;,text=&apos;Auto translate&apos;,command=en2zh,font=(&apos;Georgia&apos;,12))</span><br><span class="line">en2zhbutton.grid(row=2,column=1,padx=15)</span><br><span class="line">textaft = tkinter.Text(bg=&apos;#ccc&apos;,width=40,height=10,state=&apos;disabled&apos;)</span><br><span class="line">textaft.grid(row=2,column=2)</span><br><span class="line">bef = tkinter.Label(windows,fg=&apos;brown&apos;,text=&quot;input the text you want to translate:&quot;,font=(&apos;Georgia&apos;,12))</span><br><span class="line">bef.grid(row=1,column=0,sticky=&apos;W&apos;)</span><br><span class="line">aft = tkinter.Label(windows,fg=&apos;brown&apos;,text=&quot;translation:&quot;,font=(&apos;Georgia&apos;,12))</span><br><span class="line">aft.grid(row=1,column=2,sticky=&apos;W&apos;)</span><br><span class="line">windows.mainloop()</span><br></pre></td></tr></table></figure></p>
+<p>界面如下：<br>（看看这个翻译软件说的都是大实话~◝(^▿\^)◜）</p>
+<p><img src="https://img-blog.csdnimg.cn/20190425152202929.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20190425152530578.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>大功告成！（๑ • ‿ • ๑ ）</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/24/pyinstaller安装/" rel="next" title="安装pyinstaller的方法，及本人安装pyinstaller踩过的坑。">
+                <i class="fa fa-chevron-left"></i> 安装pyinstaller的方法，及本人安装pyinstaller踩过的坑。
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://s2.ax1x.com/2019/04/06/AWDFv8.jpg" alt="jizhihaoSAMA">
+            
+              <p class="site-author-name" itemprop="name">jizhihaoSAMA</p>
+              <div class="site-description motion-element" itemprop="description">It is just a blog,which is belongs to jizhihaoSAMA. XD</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一步：利用requests库爬取有道翻译"><span class="nav-number">1.</span> <span class="nav-text">第一步：利用requests库爬取有道翻译</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二步：利用tkinter做界面。"><span class="nav-number">2.</span> <span class="nav-text">第二步：利用tkinter做界面。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三步：利用pyinstaller打包成exe文件。"><span class="nav-number">3.</span> <span class="nav-text">第三步：利用pyinstaller打包成exe文件。</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jizhihaoSAMA</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">9k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">8 分钟</span>
+  
+</div>
+
+
+<!-- <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.0</div><-->
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/kesyoban.model.json"},"display":{"position":"right","width":200,"height":250},"mobile":{"show":true},"log":false});</script></body>
+</html>
