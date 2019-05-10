@@ -2,6 +2,14 @@
 <search>
   <entry>
     <title><![CDATA[安装tesseract的那些坑。]]></title>
+    <url>%2F2019%2F05%2F10%2F%E7%AE%80%E5%8D%95%E7%9A%84%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB%EF%BC%88python%2Bpytesseract%2Brequest%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[&emsp;&emsp;最近打算学django框架，一些好玩的东西就放在周末玩玩。所以更这种小工具之类的好玩的东西就延后点啦(つ´ω)つ。最近尝试做了一个超级简单的验证码识别。 &lt;!-- more--&gt; &amp;emsp;&amp;emsp;首先呢，要安装一个很重要的工具，&lt;font size=5&gt;tesseract（[安装过程](https://blog.csdn.net/weixin_43849588/article/details/89922327)）&lt;/font&gt;，然后安装pytesseract库，在cmd中输入`pip install pytesseract即可，不建议安装tesserocr库，windows系统不太兼容，本人之前安装过一次tesserocr库，不仅有点小麻烦（其实也不是多麻烦，只是无法直接pip install tesserocr安装该库，要去官网下载whl文件，然后再在cmd中安装），主要是只要import后运行就报错UnicodeError(╯‵□′)╯︵┻━┻，在网上也没找到什么解决方法，这里就放弃使用tesserocr库了。 &emsp;&emsp;在安装pytesseract之后，我们就可以开始尝试啦。 &emsp;&emsp;之前登陆学校教务系统的时候就觉得学校的验证码简单，应该很容易识别。于是打算用教务系统练练手(´・ω・`) &emsp;&emsp;不多说，上代码… &emsp;&emsp;纳尼，我代码呢？(*´･д･)? &emsp;&emsp;代码，，，代码被我删了（因为是几天做的，当时没有写博客。） &emsp;&emsp;真是个坏习惯。(๑´ㅁ`)ゞ &emsp;&emsp;这里简单的说下思路吧。 &emsp;&emsp;敲重点了！ 自己找个网站，按F12查看验证码的src=”xxxx”中的内容，复制后加在网站的后面，为了便于查看每次识别的二维码图片和识别结果是否相同，下载图片。（纳尼，你不会下载图片？那我就勉为其难的告诉你下载图片吧），使用pytesseract.image_to_string(image)方法，直接将图片的下载路径传到image中。最后直接print就可以啦 这是之前做完代码后的结果： 正确率 还可以？？？？？（可以尼玛，识别都能识别歪来，不是len啊(╬ﾟ ◣ ﾟ)，本来就是一个库？哦，那没事了。） 想提高识别率嘛？(`・ω・´)最简单的方法嘛，用PIL或者opencv库对图片进行去噪，灰度和二值化处理后，会增加识别率，尤其是那种比较难的验证码，噪点比较多，颜色也多，容易对识别结果造成影响。 其他的方法就是对这个库进行训练，可以提高识别率，不过具体的训练方法本人还在摸索。]]></content>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[安装tesseract的那些坑。]]></title>
     <url>%2F2019%2F05%2F07%2F%E5%AE%89%E8%A3%85tesseract%E7%9A%84%E9%82%A3%E4%BA%9B%E5%9D%91%2F</url>
     <content type="text"><![CDATA[&emsp;&emsp;最近准备试一下验证码识别，学习的时候发现还是要安装一下tesseract-OCR，来进行识别。研究半天，我这里说一下我自己的安装技巧d(`･∀･)b。 （1）去官网(点击去官网)先下载任意版本，版本后面有dev或者beta的代表是测试版，不建议下载（如果没有梯子的，我这里上传到度盘了，你们可以自行下载，度盘连接，提取码：nw9s）（2）坑了我很久的地方(´ﾟдﾟ`)：在下载安装包之后在勾选的界面，后面有(download)，建议不要下载！（有梯子而且对自己的梯子速度打包票的人可以下载。）我要哭了这里，下载速度超级感人，我的梯子下东西慢的要死，要是你们没有梯子的话，我建议你们去GitHub上面下载。下载地址，在下载好压缩包后，直接将所有的文件全部解压到安装目录下的tessdata下。如图（压缩包里面会有一个文件夹和一些文件，可以直接全部放到这里面）：直接建议你们下所有的语言包，反正也不大。 （3）设置环境变量这个还是比较简单的。在 “ 此电脑 ” 下右击点击 “ 属性 ” ，点击左边的 “ 系统保护 ” 。在 “ 高级 ”一栏里面点击 “ 环境变量 ”。 双击红圈的位置，在后面输入安装的路径就可以了 在cmd里面直接输入1tesseract --version 显示版本后就代表你安装成功了！(・ω・)]]></content>
       <tags>

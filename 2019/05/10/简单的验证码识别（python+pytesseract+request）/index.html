@@ -96,18 +96,22 @@
 
 
 
-  <meta name="description" content="&amp;emsp;&amp;emsp;&amp;nbsp;我之前是用的CSDN的博客嘛，觉得CSDN的样式有点丑，广告也挺多的，想自己也搭个播客，这里是我的原博客~">
-<meta name="keywords" content="闲谈">
+  <meta name="description" content="&amp;emsp;&amp;emsp;最近打算学django框架，一些好玩的东西就放在周末玩玩。所以更这种小工具之类的好玩的东西就延后点啦(つ´ω)つ。最近尝试做了一个超级简单的验证码识别。 &amp;lt;!-- more--&amp;gt; &amp;amp;emsp;&amp;amp;emsp;首先呢，要安装一个很重要的工具，&amp;lt;font size=5&amp;gt;tesseract（[安装过程](https://blog.csdn.ne">
+<meta name="keywords" content="python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第一个博客（搬家啦~）">
-<meta property="og:url" content="http://yoursite.com/2019/04/09/第一个博客（搬家啦-）/index.html">
+<meta property="og:title" content="安装tesseract的那些坑。">
+<meta property="og:url" content="http://yoursite.com/2019/05/10/简单的验证码识别（python+pytesseract+request）/index.html">
 <meta property="og:site_name" content="SAMA&#39;s blog">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;&amp;nbsp;我之前是用的CSDN的博客嘛，觉得CSDN的样式有点丑，广告也挺多的，想自己也搭个播客，这里是我的原博客~">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;最近打算学django框架，一些好玩的东西就放在周末玩玩。所以更这种小工具之类的好玩的东西就延后点啦(つ´ω)つ。最近尝试做了一个超级简单的验证码识别。 &amp;lt;!-- more--&amp;gt; &amp;amp;emsp;&amp;amp;emsp;首先呢，要安装一个很重要的工具，&amp;lt;font size=5&amp;gt;tesseract（[安装过程](https://blog.csdn.ne">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-09T09:51:53.394Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190510144348832.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019051014440618.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190510144423682.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-05-10T06:59:38.510Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="第一个博客（搬家啦~）">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;&amp;nbsp;我之前是用的CSDN的博客嘛，觉得CSDN的样式有点丑，广告也挺多的，想自己也搭个播客，这里是我的原博客~">
+<meta name="twitter:title" content="安装tesseract的那些坑。">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;最近打算学django框架，一些好玩的东西就放在周末玩玩。所以更这种小工具之类的好玩的东西就延后点啦(つ´ω)つ。最近尝试做了一个超级简单的验证码识别。 &amp;lt;!-- more--&amp;gt; &amp;amp;emsp;&amp;amp;emsp;首先呢，要安装一个很重要的工具，&amp;lt;font size=5&amp;gt;tesseract（[安装过程](https://blog.csdn.ne">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190510144348832.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70">
 
 
 
@@ -115,7 +119,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/04/09/第一个博客（搬家啦-）/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/10/简单的验证码识别（python+pytesseract+request）/">
 
 
 
@@ -125,7 +129,7 @@
   };
 </script>
 
-  <title>第一个博客（搬家啦~） | SAMA's blog</title>
+  <title>安装tesseract的那些坑。 | SAMA's blog</title>
   
 
 
@@ -307,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/09/第一个博客（搬家啦-）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/10/简单的验证码识别（python+pytesseract+request）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="jizhihaoSAMA">
@@ -324,7 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">第一个博客（搬家啦~）
+          <h1 class="post-title" itemprop="name headline">安装tesseract的那些坑。
 
               
             
@@ -350,7 +354,7 @@
                 
               
 
-              <time title="创建时间：2019-04-09 15:02:29 / 修改时间：17:51:53" itemprop="dateCreated datePublished" datetime="2019-04-09T15:02:29+08:00">2019-04-09</time>
+              <time title="创建时间：2019-05-10 14:58:05 / 修改时间：14:59:38" itemprop="dateCreated datePublished" datetime="2019-05-10T14:58:05+08:00">2019-05-10</time>
             
 
             
@@ -390,7 +394,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">211</span>
+                <span title="本文字数">1.2k</span>
               
 
               
@@ -424,8 +428,25 @@
       
 
       
-        <p>&emsp;&emsp;&nbsp;<font size="4">我之前是用的CSDN的博客嘛，觉得CSDN的样式有点丑，广告也挺多的，想自己也搭个播客，这里是我的<a href="https://blog.csdn.net/weixin_43849588" target="_blank" rel="noopener">原博客</a>~</font><br><a id="more"></a><br>&emsp;&emsp;&nbsp;<font size="3">搭个人博客的方法我感觉有点小复杂，不过庆幸的是，有个人给了我办法。这里是<a href="https://firstkaixin.github.io/2019/03/17/%E6%90%AD%E5%8D%9A%E5%AE%A2/" target="_blank" rel="noopener">方法</a>哟，不用花多少时间。</font></p>
-<p>&emsp;&emsp;&nbsp;<font size="3" color="red">博客的话我还是以这个更新为主把，另外一个博客的话看情况吧，要是我勤快的话就2个都更，懒得话就更新这个咯，hh</font></p>
+        <p>&emsp;&emsp;最近打算学django框架，一些好玩的东西就放在周末玩玩。所以更这种小工具之类的好玩的东西就延后点啦(つ´ω<code>)つ。最近尝试做了一个超级简单的验证码识别。
+&lt;!-- more--&gt;
+&amp;emsp;&amp;emsp;首先呢，要安装一个很重要的工具，&lt;font size=5&gt;tesseract（[安装过程](https://blog.csdn.net/weixin_43849588/article/details/89922327)）&lt;/font&gt;，然后安装pytesseract库，在cmd中输入`</code>pip install pytesseract<code>即可，不建议安装tesserocr库，windows系统不太兼容，本人之前安装过一次tesserocr库，不仅有点小麻烦（其实也不是多麻烦，只是无法直接</code>pip install tesserocr<code>安装该库，要去官网下载whl文件，然后再在cmd中安装），主要是只要import后运行就报错</code>UnicodeError<code></code>(╯‵□′)╯︵┻━┻，在网上也没找到什么解决方法，这里就放弃使用tesserocr库了。</p>
+<p>&emsp;&emsp;在安装pytesseract之后，我们就可以开始尝试啦。</p>
+<p>&emsp;&emsp;之前登陆学校教务系统的时候就觉得学校的验证码简单，应该很容易识别。于是打算用教务系统练练手(´・ω・`)</p>
+<p>&emsp;&emsp;不多说，上代码…</p>
+<p>&emsp;&emsp;纳尼，我代码呢？(*´･д･)?</p>
+<p>&emsp;&emsp;代码，，，代码被我删了（因为是几天做的，当时没有写博客。）</p>
+<p>&emsp;&emsp;真是个坏习惯。(๑´ㅁ`)ゞ</p>
+<p>&emsp;&emsp;这里简单的说下思路吧。</p>
+<p>&emsp;&emsp;敲重点了！</p>
+<font size="5">自己找个网站，按F12查看验证码的src=”xxxx”中的内容，复制后加在网站的后面，为了便于查看每次识别的二维码图片和识别结果是否相同，下载图片。（纳尼，你不会下载图片？那我就勉为其难的告诉你<a href="https://blog.csdn.net/weixin_43849588/article/details/89291536" target="_blank" rel="noopener">下载图片</a>吧），使用pytesseract.image_to_string(image)方法，直接将图片的下载路径传到image中。最后直接print就可以啦<br></font>
+
+<p>这是之前做完代码后的结果：<br><img src="https://img-blog.csdnimg.cn/20190510144348832.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/2019051014440618.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20190510144423682.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>正确率 <del>还可以</del>？？？？？（可以尼玛，识别都能识别歪来，不是len啊(╬ﾟ ◣ ﾟ)，本来就是一个库？哦，那没事了。）</p>
+<p>想提高识别率嘛？(`・ω・´)<br>最简单的方法嘛，用PIL或者opencv库对图片进行去噪，灰度和二值化处理后，会增加识别率，尤其是那种比较难的验证码，噪点比较多，颜色也多，容易对识别结果造成影响。</p>
+<p>其他的方法就是对这个库进行训练，可以提高识别率，不过具体的训练方法本人还在摸索。</p>
 
       
     </div>
@@ -449,7 +470,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/闲谈/" rel="tag"><i class="fa fa-tag"></i> 闲谈</a>
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
           
         </div>
       
@@ -462,15 +483,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/05/07/安装tesseract的那些坑/" rel="next" title="安装tesseract的那些坑。">
+                <i class="fa fa-chevron-left"></i> 安装tesseract的那些坑。
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/10/博客美化/" rel="prev" title="美化博客">
-                美化博客 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
