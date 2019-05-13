@@ -326,7 +326,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/10/简单的验证码识别（python+pytesseract+request）/" class="post-title-link" itemprop="url">安装tesseract的那些坑。</a>
+                <a href="/2019/05/10/简单的验证码识别（python+pytesseract+request）/" class="post-title-link" itemprop="url">简单的验证码识别（PIL+pytesseract+request）。</a>
               
             
           </h1>
@@ -351,12 +351,24 @@
                 
               
 
-              <time title="创建时间：2019-05-10 14:58:05 / 修改时间：14:59:38" itemprop="dateCreated datePublished" datetime="2019-05-10T14:58:05+08:00">2019-05-10</time>
+              <time title="创建时间：2019-05-10 14:58:05" itemprop="dateCreated datePublished" datetime="2019-05-10T14:58:05+08:00">2019-05-10</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-13 11:22:43" itemprop="dateModified" datetime="2019-05-13T11:22:43+08:00">2019-05-13</time>
               
             
           </span>
@@ -421,7 +433,7 @@
         
           
             <p>&emsp;&emsp;最近打算学django框架，一些好玩的东西就放在周末玩玩。所以更这种小工具之类的好玩的东西就延后点啦(つ´ω<code>)つ。最近尝试做了一个超级简单的验证码识别。
-&lt;!-- more--&gt;
+&lt;!-- more --&gt;
 &amp;emsp;&amp;emsp;首先呢，要安装一个很重要的工具，&lt;font size=5&gt;tesseract（[安装过程](https://blog.csdn.net/weixin_43849588/article/details/89922327)）&lt;/font&gt;，然后安装pytesseract库，在cmd中输入`</code>pip install pytesseract<code>即可，不建议安装tesserocr库，windows系统不太兼容，本人之前安装过一次tesserocr库，不仅有点小麻烦（其实也不是多麻烦，只是无法直接</code>pip install tesserocr<code>安装该库，要去官网下载whl文件，然后再在cmd中安装），主要是只要import后运行就报错</code>UnicodeError<code></code>(╯‵□′)╯︵┻━┻，在网上也没找到什么解决方法，这里就放弃使用tesserocr库了。</p>
 <p>&emsp;&emsp;在安装pytesseract之后，我们就可以开始尝试啦。</p>
 <p>&emsp;&emsp;之前登陆学校教务系统的时候就觉得学校的验证码简单，应该很容易识别。于是打算用教务系统练练手(´・ω・`)</p>
