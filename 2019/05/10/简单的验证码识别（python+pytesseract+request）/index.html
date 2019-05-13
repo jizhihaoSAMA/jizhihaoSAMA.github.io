@@ -96,21 +96,21 @@
 
 
 
-  <meta name="description" content="&amp;emsp;&amp;emsp;最近打算学django框架，一些好玩的东西就放在周末玩玩。所以更这种小工具之类的好玩的东西就延后点啦(つ´ω)つ。最近尝试做了一个超级简单的验证码识别。 &amp;lt;!-- more --&amp;gt; &amp;amp;emsp;&amp;amp;emsp;首先呢，要安装一个很重要的工具，&amp;lt;font size=5&amp;gt;tesseract（[安装过程](https://blog.csdn.n">
+  <meta name="description" content="&amp;emsp;&amp;emsp;最近打算学django框架，一些好玩的东西就放在周末玩玩。所以更这种小工具之类的好玩的东西就延后点啦(つ´ω`)つ。最近尝试做了一个超级简单的验证码识别。">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="简单的验证码识别（PIL+pytesseract+request）。">
 <meta property="og:url" content="http://yoursite.com/2019/05/10/简单的验证码识别（python+pytesseract+request）/index.html">
 <meta property="og:site_name" content="SAMA&#39;s blog">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;最近打算学django框架，一些好玩的东西就放在周末玩玩。所以更这种小工具之类的好玩的东西就延后点啦(つ´ω)つ。最近尝试做了一个超级简单的验证码识别。 &amp;lt;!-- more --&amp;gt; &amp;amp;emsp;&amp;amp;emsp;首先呢，要安装一个很重要的工具，&amp;lt;font size=5&amp;gt;tesseract（[安装过程](https://blog.csdn.n">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;最近打算学django框架，一些好玩的东西就放在周末玩玩。所以更这种小工具之类的好玩的东西就延后点啦(つ´ω`)つ。最近尝试做了一个超级简单的验证码识别。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190510144348832.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2019051014440618.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190510144423682.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-05-13T03:22:43.995Z">
+<meta property="og:updated_time" content="2019-05-13T03:31:04.615Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简单的验证码识别（PIL+pytesseract+request）。">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;最近打算学django框架，一些好玩的东西就放在周末玩玩。所以更这种小工具之类的好玩的东西就延后点啦(つ´ω)つ。最近尝试做了一个超级简单的验证码识别。 &amp;lt;!-- more --&amp;gt; &amp;amp;emsp;&amp;amp;emsp;首先呢，要安装一个很重要的工具，&amp;lt;font size=5&amp;gt;tesseract（[安装过程](https://blog.csdn.n">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;最近打算学django框架，一些好玩的东西就放在周末玩玩。所以更这种小工具之类的好玩的东西就延后点啦(つ´ω`)つ。最近尝试做了一个超级简单的验证码识别。">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190510144348832.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70">
 
 
@@ -371,7 +371,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-13 11:22:43" itemprop="dateModified" datetime="2019-05-13T11:22:43+08:00">2019-05-13</time>
+                <time title="修改时间：2019-05-13 11:31:04" itemprop="dateModified" datetime="2019-05-13T11:31:04+08:00">2019-05-13</time>
               
             
           </span>
@@ -406,7 +406,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.2k</span>
+                <span title="本文字数">1k</span>
               
 
               
@@ -440,9 +440,7 @@
       
 
       
-        <p>&emsp;&emsp;最近打算学django框架，一些好玩的东西就放在周末玩玩。所以更这种小工具之类的好玩的东西就延后点啦(つ´ω<code>)つ。最近尝试做了一个超级简单的验证码识别。
-&lt;!-- more --&gt;
-&amp;emsp;&amp;emsp;首先呢，要安装一个很重要的工具，&lt;font size=5&gt;tesseract（[安装过程](https://blog.csdn.net/weixin_43849588/article/details/89922327)）&lt;/font&gt;，然后安装pytesseract库，在cmd中输入`</code>pip install pytesseract<code>即可，不建议安装tesserocr库，windows系统不太兼容，本人之前安装过一次tesserocr库，不仅有点小麻烦（其实也不是多麻烦，只是无法直接</code>pip install tesserocr<code>安装该库，要去官网下载whl文件，然后再在cmd中安装），主要是只要import后运行就报错</code>UnicodeError<code></code>(╯‵□′)╯︵┻━┻，在网上也没找到什么解决方法，这里就放弃使用tesserocr库了。</p>
+        <p>&emsp;&emsp;最近打算学django框架，一些好玩的东西就放在周末玩玩。所以更这种小工具之类的好玩的东西就延后点啦(つ´ω`)つ。最近尝试做了一个超级简单的验证码识别。<br><a id="more"></a><br>&emsp;&emsp;首先呢，要安装一个很重要的工具，<font size="5">tesseract（<a href="https://blog.csdn.net/weixin_43849588/article/details/89922327" target="_blank" rel="noopener">安装过程</a>）</font>，然后安装pytesseract库，在cmd中输入<code>pip install pytesseract</code>即可，不建议安装tesserocr库，windows系统不太兼容，本人之前安装过一次tesserocr库，不仅有点小麻烦（其实也不是多麻烦，只是无法直接<code>pip install tesserocr</code>安装该库，要去官网下载whl文件，然后再在cmd中安装），主要是只要import后运行就报错<code>UnicodeError</code>(╯‵□′)╯︵┻━┻，在网上也没找到什么解决方法，这里就放弃使用tesserocr库了。</p>
 <p>&emsp;&emsp;在安装pytesseract之后，我们就可以开始尝试啦。</p>
 <p>&emsp;&emsp;之前登陆学校教务系统的时候就觉得学校的验证码简单，应该很容易识别。于是打算用教务系统练练手(´・ω・`)</p>
 <p>&emsp;&emsp;不多说，上代码…</p>
@@ -453,7 +451,8 @@
 <p>&emsp;&emsp;敲重点了！</p>
 <font size="5">自己找个网站，按F12查看验证码的src=”xxxx”中的内容，复制后加在网站的后面，为了便于查看每次识别的二维码图片和识别结果是否相同，下载图片。（纳尼，你不会下载图片？那我就勉为其难的告诉你<a href="https://blog.csdn.net/weixin_43849588/article/details/89291536" target="_blank" rel="noopener">下载图片</a>吧），使用pytesseract.image_to_string(image)方法，直接将图片的下载路径传到image中。最后直接print就可以啦<br></font>
 
-<p>这是之前做完代码后的结果：<br><img src="https://img-blog.csdnimg.cn/20190510144348832.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>这是之前做完代码后的结果：</p>
+<p><img src="https://img-blog.csdnimg.cn/20190510144348832.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/2019051014440618.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdnimg.cn/20190510144423682.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg0OTU4OA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <p>正确率 <del>还可以</del>？？？？？（可以尼玛，识别都能识别歪来，不是len啊(╬ﾟ ◣ ﾟ)，本来就是一个库？哦，那没事了。）</p>
