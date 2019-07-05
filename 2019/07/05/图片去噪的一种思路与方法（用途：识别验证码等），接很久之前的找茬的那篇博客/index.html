@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="本人自己用的简单暴力的去噪思路：&amp;emsp;&amp;emsp;把图片分成众多小矩形，每一个小矩形进行判断白点（图片已经二值化处理），如果该矩形内的白点大于一个值（这个值可以根据你取得矩形的大小进行酌情处理）。小于这个值则这一块的值变成0（黑色）。 过程：我有如下部分代码1234.... # 图片已经打开，保存在img变量里面pixel = img.load()print(pixel[x,y]) # 打印">
+  <meta name="description" content="本人自己用的简单暴力的去噪思路：">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图片去噪的一种思路与方法（用途：识别验证码等），接很久之前的找茬的那篇博客">
 <meta property="og:url" content="http://yoursite.com/2019/07/05/图片去噪的一种思路与方法（用途：识别验证码等），接很久之前的找茬的那篇博客/index.html">
 <meta property="og:site_name" content="SAMA&#39;s blog">
-<meta property="og:description" content="本人自己用的简单暴力的去噪思路：&amp;emsp;&amp;emsp;把图片分成众多小矩形，每一个小矩形进行判断白点（图片已经二值化处理），如果该矩形内的白点大于一个值（这个值可以根据你取得矩形的大小进行酌情处理）。小于这个值则这一块的值变成0（黑色）。 过程：我有如下部分代码1234.... # 图片已经打开，保存在img变量里面pixel = img.load()print(pixel[x,y]) # 打印">
+<meta property="og:description" content="本人自己用的简单暴力的去噪思路：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-04T17:51:47.625Z">
+<meta property="og:updated_time" content="2019-07-05T08:02:21.987Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图片去噪的一种思路与方法（用途：识别验证码等），接很久之前的找茬的那篇博客">
-<meta name="twitter:description" content="本人自己用的简单暴力的去噪思路：&amp;emsp;&amp;emsp;把图片分成众多小矩形，每一个小矩形进行判断白点（图片已经二值化处理），如果该矩形内的白点大于一个值（这个值可以根据你取得矩形的大小进行酌情处理）。小于这个值则这一块的值变成0（黑色）。 过程：我有如下部分代码1234.... # 图片已经打开，保存在img变量里面pixel = img.load()print(pixel[x,y]) # 打印">
+<meta name="twitter:description" content="本人自己用的简单暴力的去噪思路：">
 
 
 
@@ -350,7 +350,7 @@
                 
               
 
-              <time title="创建时间：2019-07-05 00:27:05 / 修改时间：01:51:47" itemprop="dateCreated datePublished" datetime="2019-07-05T00:27:05+08:00">2019-07-05</time>
+              <time title="创建时间：2019-07-05 00:27:05 / 修改时间：16:02:21" itemprop="dateCreated datePublished" datetime="2019-07-05T00:27:05+08:00">2019-07-05</time>
             
 
             
@@ -424,7 +424,8 @@
       
 
       
-        <h1 id="本人自己用的简单暴力的去噪思路："><a href="#本人自己用的简单暴力的去噪思路：" class="headerlink" title="本人自己用的简单暴力的去噪思路："></a><font size="5">本人自己用的简单暴力的去噪思路：<br></font></h1><p>&emsp;&emsp;把图片分成众多小矩形，每一个小矩形进行判断白点（图片已经二值化处理），如果该矩形内的白点大于一个值（这个值可以根据你取得矩形的大小进行酌情处理）。小于这个值则这一块的值变成0（黑色）。<br></p>
+        <h1 id="本人自己用的简单暴力的去噪思路："><a href="#本人自己用的简单暴力的去噪思路：" class="headerlink" title="本人自己用的简单暴力的去噪思路："></a><font size="5">本人自己用的简单暴力的去噪思路：<br></font></h1><a id="more"></a>
+<p>&emsp;&emsp;把图片分成众多小矩形，每一个小矩形进行判断白点（图片已经二值化处理），如果该矩形内的白点大于一个值（这个值可以根据你取得矩形的大小进行酌情处理）。小于这个值则这一块的值变成0（黑色）。<br></p>
 <h1 id="过程："><a href="#过程：" class="headerlink" title="过程："></a>过程：</h1><p>我有如下部分代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.... # 图片已经打开，保存在img变量里面</span><br><span class="line"></span><br><span class="line">pixel = img.load()</span><br><span class="line">print(pixel[x,y]) # 打印出坐标为（x，y）的像素值</span><br></pre></td></tr></table></figure></p>
 <p>利用PIL库的im.load方法（im.load方法算是PIL库里面处理像素问题比较快的），可以得到一个图片每个像素的像素值，实质上是一个二维队列（就像C语言里面的二维数组）,注意：如果你将图片二值化（图片convert(‘1’)，）或者convert(‘1’)，就只会显示一个数字。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">img2 = img.convert(&apos;L&apos;)</span><br><span class="line">pixel2 = img2.load()</span><br><span class="line">print(pixel2[x,y]) # 显示一个数字，该数字位于0~255之间，每个像素用8bit表示</span><br><span class="line"># 如果前面是img2 = img.convert(&apos;1&apos;)二值化后，结果只可能是0（黑），或者255（白0</span><br></pre></td></tr></table></figure></p>
 <p>在RGB模式或者RGBA模式下，打印一个像素的值，结果会显示一个元祖，形式为(R值，G值，B值)或者（R值，G值，B值，A值）。<br><br></p>
