@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[pyinstaller打包使用tcl/tk扩展]]></title>
+    <url>%2F2019%2F08%2F20%2Fpyinstaller%E4%BD%BF%E7%94%A8tcl%E5%92%8Ctk%E6%89%A9%E5%B1%95%2F</url>
+    <content type="text"><![CDATA[现在网上很多的pyinstaller教程都已经过时了比如这篇18年7月的某篇博客：https://blog.csdn.net/BearStarX/article/details/81054134不说其他的参数，但这个参数是错的，总之是无法使用，会报错在多次查询资料后，有两种方法：1、在.spec里面的datas里面加入该tcl/tk扩展的路径以及名称。执行pyinstaller [-w] xx.spec2、可以直接在打包时直接加入参数 --add-data，该方法是可行的，只是目前本人使用时会报错]]></content>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[图片去噪的一种思路与方法（用途：识别验证码等），接很久之前的找茬的那篇博客]]></title>
     <url>%2F2019%2F07%2F05%2F%E5%9B%BE%E7%89%87%E5%8E%BB%E5%99%AA%E7%9A%84%E4%B8%80%E7%A7%8D%E6%80%9D%E8%B7%AF%E4%B8%8E%E6%96%B9%E6%B3%95%EF%BC%88%E7%94%A8%E9%80%94%EF%BC%9A%E8%AF%86%E5%88%AB%E9%AA%8C%E8%AF%81%E7%A0%81%E7%AD%89%EF%BC%89%EF%BC%8C%E6%8E%A5%E5%BE%88%E4%B9%85%E4%B9%8B%E5%89%8D%E7%9A%84%E6%89%BE%E8%8C%AC%E7%9A%84%E9%82%A3%E7%AF%87%E5%8D%9A%E5%AE%A2%2F</url>
     <content type="text"><![CDATA[本人自己用的简单暴力的去噪思路： &emsp;&emsp;把图片分成众多小矩形，每一个小矩形进行判断白点（图片已经二值化处理），如果该矩形内的白点大于一个值（这个值可以根据你取得矩形的大小进行酌情处理）。小于这个值则这一块的值变成0（黑色）。 过程：我有如下部分代码1234.... # 图片已经打开，保存在img变量里面pixel = img.load()print(pixel[x,y]) # 打印出坐标为（x，y）的像素值 利用PIL库的im.load方法（im.load方法算是PIL库里面处理像素问题比较快的），可以得到一个图片每个像素的像素值，实质上是一个二维队列（就像C语言里面的二维数组）,注意：如果你将图片二值化（图片convert(‘1’)，）或者convert(‘1’)，就只会显示一个数字。例如：1234img2 = img.convert(&apos;L&apos;)pixel2 = img2.load()print(pixel2[x,y]) # 显示一个数字，该数字位于0~255之间，每个像素用8bit表示# 如果前面是img2 = img.convert(&apos;1&apos;)二值化后，结果只可能是0（黑），或者255（白0 在RGB模式或者RGBA模式下，打印一个像素的值，结果会显示一个元祖，形式为(R值，G值，B值)或者（R值，G值，B值，A值）。 以上大概介绍了一下load之后获得了一个二维列表，接下来开始进行去噪处理： 本人的思路是，先图片二值化，利用2个for循环遍历整个图片大小的像素值，将图片切成一个个小矩形，判断每个矩形内白点，然后设定一个值（这个值根据你切的大小以及像素多少自己定义个数字就可以了），矩形是越小越好，越小虽然会增加计算机的计算时间，但可以使图片去噪效率更高。 我这里上了我那次辅助的去噪代码（部分）图片是480*360分辨率。123456789101112131415for xx in range(40): # 横着12 竖着9 运行40次 0代表黑色，255代表白色，去噪点 for yy in range(40): # 每一个24*18 x = xx * 12 y = yy * 9 count = 0 for i in range(0, 12): for j in range(0, 9): if (array[i + x, j + y] == 255): count = count + 1 if count &lt;= 10: # 去黑点的地方，也就是该区域内白点小于等于10，判断是噪点，则像素值全部赋值为0，也就是这区域全黑。 for i in range(0, 12): for j in range(0, 9): array[i + x, j + y] = 0 else: # 留白的地方，点击中心位置 xy.append([x + 12, y + 9]) # 坐标是基于图像，要基于游戏]]></content>
