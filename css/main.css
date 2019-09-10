@@ -1765,7 +1765,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #d6ffff;
+  background: #7a1326;
 }
 .feed-link,
 .chat {
@@ -2719,15 +2719,14 @@ body {
   opacity: 0.8;
   min-height: 500px;
 }
-.header {
-  opacity: 0.8;
+.site-author {
+  background: url("https://s2.ax1x.com/2019/04/10/ATZWjI.jpg");
+  background-size: 32% 47.7%;
+  background-repeat: no-repeat;
+  background-position: 49.7% 4%;
 }
 .footer {
   opacity: 0.8;
-}
-.live2d-widget-container {
-  opacity: 0.9 !important;
-  right: -20px !important;
 }
 .site-author-image {
   opacity: 1 !important;
@@ -2737,4 +2736,8 @@ body {
 }
 .site-author-image:hover {
   opacity: 0 !important;
+}
+.live2d-widget-container {
+  opacity: 0.9 !important;
+  right: -20px !important;
 }
