@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[彻底禁用Chrome请停用开发者模式]]></title>
+    <url>%2F2019%2F09%2F18%2F%E5%BD%BB%E5%BA%95%E7%A6%81%E7%94%A8Chrome%E8%AF%B7%E5%81%9C%E7%94%A8%E5%BC%80%E5%8F%91%E8%80%85%E6%A8%A1%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[每次进入chrome都弹出这个提示十分的麻烦参考了这个曾经的博客：传送门Chrome的77.0.3865.75（正式版本） （64 位）目前可用 方法和这个博客一样，进入到该注册表的目录下HKEY_CURRENT_USER\Software\Google\Update\ClientState{8A69D345-D564-463c-AFF1-A69D9E530F96}与旧版本不同的是，我们现在找不到这个ap的值，直接左键新增“字符串值”，名为“ap”，并赋值为“x64-dev”，完成]]></content>
+      <tags>
+        <tag>闲谈</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[pyinstaller打包使用tcl/tk扩展]]></title>
     <url>%2F2019%2F08%2F20%2Fpyinstaller%E4%BD%BF%E7%94%A8tcl%E5%92%8Ctk%E6%89%A9%E5%B1%95%2F</url>
     <content type="text"><![CDATA[现在网上很多的pyinstaller教程都已经过时了比如这篇18年7月的某篇博客：https://blog.csdn.net/BearStarX/article/details/81054134不说其他的参数，但这个参数是错的，总之是无法使用，会报错在多次查询资料后，有两种方法：1、在.spec里面的datas里面加入该tcl/tk扩展的路径以及名称。执行pyinstaller [-w] xx.spec2、可以直接在打包时直接加入参数 --add-data，该方法是可行的，只是目前本人使用时会报错]]></content>
