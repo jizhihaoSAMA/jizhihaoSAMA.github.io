@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Java（Eclipse）导入MySQL驱动]]></title>
     <url>%2F2019%2F11%2F14%2FJava%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8C%85%2F</url>
-    <content type="text"><![CDATA[1、下载jar驱动首先去MySQL官网下载驱动，地址在这里噢！！！！！，选择Platform Independent，下载ZIP版本的就可以了。 2、下载完成之后导入jar包我用的是Eclipse，右键你的项目名，点击属性会出现如图： 再点击Java 构建路径（英文版的应该是Java Bulid Path），如图： 然后应用关闭就可以了。 此时的编译器就不会报错了~( ^ω^)]]></content>
+    <content type="text"><![CDATA[步骤如下： 1、下载jar驱动首先去MySQL官网下载驱动，地址在这里噢！！！！！，选择Platform Independent，下载ZIP版本的就可以了。 2、下载完成之后导入jar包我用的是Eclipse，右键你的项目名，点击属性会出现如图： 再点击Java 构建路径（英文版的应该是Java Bulid Path），如图： 然后应用关闭就可以了。 此时的编译器就不会报错了~( ^ω^)]]></content>
       <tags>
         <tag>Java</tag>
       </tags>
