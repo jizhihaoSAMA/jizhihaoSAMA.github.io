@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Mybatis学习笔记（一）]]></title>
+    <url>%2F2019%2F12%2F22%2FMybatis%2F</url>
+    <content type="text"><![CDATA[MyBatis整体构架 数据源配置文件数据库的数据源配置文件是SqlMapConfig.xml，要配置数据库驱动，数据库链接地址，用户名，密码等。如果有性能要求，可以配置连接池的连接数和空闲时间等参数。 大致内容（部分配置）： 1234567891011121314151617181920&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;!DOCTYPE configurationPUBLIC "-//mybatis.org//DTD Config 3.0//EN""http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;&lt;configuration&gt; &lt;environments default="development"&gt; &lt;environment id="development"&gt; &lt;!--使用JDBC事务管理--&gt; &lt;transactionManager type="JDBC"/&gt; &lt;!--数据库连接池--&gt; &lt;dataSource type="POOLED"&gt; &lt;property name="driver" value="org.gjt.mm.mysql.Driver" /&gt; &lt;property name="url" value="jdbc:mysql://localhost:3306/mydata?characterEncoding=utf-8"/&gt; &lt;property name="username" value="root"/&gt; &lt;property name="password" value="xxxx"/&gt; &lt;/dataSource&gt; &lt;/environment&gt; &lt;/environments&gt;&lt;/configuration&gt; 可以在mapper标签中配置SQL语句。select标签堆中包含一堆SQL查询语句。parameterType指定输入参数的类型，resultType指定了输出结果映射的Java对象类型。这查询结果会将单条记录映射成Java的一个对象。 SQL映射配置文件数据库的SQL映射配置文件是Mapper.xml，对于SQL语句执行的参数，以及查询语句返回的结果集对象。 大致内容（部分配置）： 12345678910&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;!DOCTYPE mapperPUBLIC "-//mybatis.org//DTD Mapper 3.0//EN""http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;&lt;mapper&gt; &lt;select id="findUserById" parameterType="int" resultType="cn.com.mybatis.model.User"&gt; SELECT * FROM USER WHERE id=#&#123;id&#125; &lt;/select&gt;&lt;/mapper&gt; 可以在mapper标签中配置SQL语句。select标签堆中包含一堆SQL查询语句。parameterType指定输入参数的类型，resultType指定了输出结果映射的Java对象类型。这查询结果会将单条记录映射成Java的一个对象。 需要配置mapper.xml的文件路径，要在SQL映射配置文件（SqlMapConfig.xml）下加入 1234&lt;mapper&gt; &lt;!--应该是相对路径--&gt; &lt;mapper resource="sqlmap/UserMapper.xml"/&gt;&lt;/mapper&gt; 会话工厂与会话配置好以上文件后，需要读取和加载这些信息，就要用到核心对象“会话工厂”和“会话”。会话工厂即SqlSessionFactory类，它会根据Resources资源信息加载对象，获取开发人员在项目中配置的数据库连接池配置文件SqlMapConfig.xml信息，产生实例类SqlSession Mybatis运行流程]]></content>
+      <tags>
+        <tag>Java</tag>
+        <tag>Mybatis</tag>
+        <tag>JDBC</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Java（Eclipse）导入MySQL驱动]]></title>
     <url>%2F2019%2F11%2F14%2FJava%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8C%85%2F</url>
     <content type="text"><![CDATA[步骤如下： 1、下载jar驱动首先去MySQL官网下载驱动，地址在这里噢！！！！！，选择Platform Independent，下载ZIP版本的就可以了。 2、下载完成之后导入jar包我用的是Eclipse，右键你的项目名，点击属性会出现如图： 再点击Java 构建路径（英文版的应该是Java Bulid Path），如图： 然后应用关闭就可以了。 此时的编译器就不会报错了~( ^ω^)]]></content>
