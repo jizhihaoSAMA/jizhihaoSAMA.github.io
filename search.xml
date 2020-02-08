@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Tkinter重要的一个要点]]></title>
+    <url>%2F2020%2F02%2F08%2FTkinter%E9%87%8D%E8%A6%81%E7%9A%84%E4%B8%80%E4%B8%AA%E8%A6%81%E7%82%B9%2F</url>
+    <content type="text"><![CDATA[对于任何一个需要绑定的东西如: .after() .bind() 。。。and so on. 不能直接传参数，（如果传参数，那么在运行到这个地方的时候则会直接运行该方法，甚至导致.bind()或者.after()失效）必须要用lambda: 你的函数(你的参数)，如果你在.after里面出现了传参的方法，那么大概率会出现以下异常: RuntimeError: maximum recursion depth exceeded 这个坑了我几个小时。这个小细节真的很要命。]]></content>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[pywintypes.error异常处理]]></title>
+    <url>%2F2020%2F02%2F08%2Fpywintypes.error%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%2F</url>
+    <content type="text"><![CDATA[我的原答案见：https://stackoverflow.com/questions/25053785/how-to-catch-these-exceptions-individually/60075942#60075942 之前使用有关win32的库时，有时候会出现pywintypes.error异常，但我看的各种异常里面并没有看到pywintypes.error的异常。 今天调试了一下：发现现在已经将pywintypes.error归为BaseException。其他还是看网站的答案吧，我懒得说了，]]></content>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[为tkinter.scrolledText设置边框]]></title>
     <url>%2F2020%2F01%2F19%2F%E4%B8%BAtkinter.scrolledText%E8%AE%BE%E7%BD%AE%E8%BE%B9%E6%A1%86%2F</url>
     <content type="text"><![CDATA[scrolledText没有什么参考文档 python官方文档是这个页面。当中提到scrolledText的构造方法和Text基本类似。 1234567import tkinterfrom tkinter import scrolledtextWin = tkinter.Tk()Text = scrolledtext.ScrolledText(Win)Text.pack(padx=10,pady=10)Win.mainloop() 能制作一个简单的滚动文本框是这样子的情况，但这个文本框边框很丑，，，，我找了很久文档也没有找到怎么设置tkinter的某个组件的边框，在堆栈溢出网站找到一个方法，源网站 试过1234如果想加边框设置```relief=&quot;solid&quot;```，即可即 import tkinterfrom tkinter import scrolledtext Win = tkinter.Tk()Text = scrolledtext.ScrolledText(Win,relief=”solid”)Text.pack(padx=10,pady=10)Win.mainloop()` 界面如图 觉得边框太窄的可以自己设置borderwidth设置宽度。这个solid属性我试了半天，那个Text网站里面都没写这个属性。看报错结果出来的 顺便说一下。relief的不同参数对应的效果： sunken:内部包括边框整体向内凹陷。(大多默认是这个) raised: 内部包括边框整体向外凸起。 groove: 仅内部突起 ridge: 仅边框突起 flat: 无边框 solid: 有实边框]]></content>
