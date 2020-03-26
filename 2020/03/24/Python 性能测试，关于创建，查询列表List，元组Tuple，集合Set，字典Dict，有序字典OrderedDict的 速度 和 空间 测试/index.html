@@ -96,17 +96,18 @@
 
 
 
-  <meta name="description" content="测试代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384 import timeit，sys的时间import getsi">
+  <meta name="description" content="测试代码如下：">
+<meta name="keywords" content="Python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SAMA&#39;s blog">
+<meta property="og:title" content="Python 性能小测试">
 <meta property="og:url" content="http://www.jizhihaosama.works/2020/03/24/Python 性能测试，关于创建，查询列表List，元组Tuple，集合Set，字典Dict，有序字典OrderedDict的 速度 和 空间 测试/index.html">
 <meta property="og:site_name" content="SAMA&#39;s blog">
-<meta property="og:description" content="测试代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384 import timeit，sys的时间import getsi">
+<meta property="og:description" content="测试代码如下：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-24T15:54:40.878Z">
+<meta property="og:updated_time" content="2020-03-26T09:24:14.920Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SAMA&#39;s blog">
-<meta name="twitter:description" content="测试代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384 import timeit，sys的时间import getsi">
+<meta name="twitter:title" content="Python 性能小测试">
+<meta name="twitter:description" content="测试代码如下：">
 
 
 
@@ -124,7 +125,7 @@
   };
 </script>
 
-  <title> | SAMA's blog</title>
+  <title>Python 性能小测试 | SAMA's blog</title>
   
 
 
@@ -352,7 +353,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">Python 性能小测试
 
               
             
@@ -379,12 +380,24 @@
                 
               
 
-              <time title="创建时间：2020-03-24 23:54:38 / 修改时间：23:54:40" itemprop="dateCreated datePublished" datetime="2020-03-24T23:54:38+08:00">2020-03-24</time>
+              <time title="创建时间：2020-03-24 23:54:38" itemprop="dateCreated datePublished" datetime="2020-03-24T23:54:38+08:00">2020-03-24</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-26 17:24:14" itemprop="dateModified" datetime="2020-03-26T17:24:14+08:00">2020-03-26</time>
               
             
           </span>
@@ -454,12 +467,9 @@
 
       
         <p>测试代码如下：</p>
+<a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"> import timeit，</span><br><span class="line">sys的时间import getsizeof作为</span><br><span class="line">集合的大小import OrderedDict </span><br><span class="line">日期随机List_Test = list（范围（5000））打印（“列表的大小为：&#123;&#125;”。format（Size（List_Test）））Set_Test = set（范围（5000））打印（“ Set的大小为：&#123;&#125;”。格式（Size（Set_Test）））Tuple_Test = tuple（范围（5000））打印（“ Tuple的大小为：&#123;&#125;”。格式（大小（Tuple_Test））Dict_Test = &#123;k：k，代表范围为（5000）的k&#125;打印（“ Dict的大小为：&#123;&#125;”。格式（大小（Dict_Test）））OrderedDict_Test = OrderedDict（&#123;k：k表示）范围（5000）中的k，&#125;）打印（“ OrderedDict的大小为：&#123;&#125;”。格式（Size（OrderedDict_Test）））打印（“ \ n现在是测试速度\ n”）time.sleep（1） def创建列表（）：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    列表= [i代表范围（5000）中的i] def Test_List（）：randomNumber = random.randint（0,5000）如果List_Test中的randomNumber：返回False def Create_Set（）：Set = set（i for i在范围（5000）中）def Test_Set（）：randomNumber = random.randint（0,5000）如果Set_Test中的随机数：返回False def Create_Tuple（）：元组=元组（i表示范围（5000）中的i） def Test_Tuple（）：randomNumber = random.randint（0,5000），如果Tuple_Test中的随机数：返回False def Create_Dict（）：Dict = &#123;k：k表示范围（5000）中的k&#125; def Test_Dict（）： randomNumber = rand。（0,5000），如果Dict_Test.keys（）中的随机数：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        返回false def Create_OrderedDict（）：orderedDict = OrderedDict（&#123;k：k，表示范围为5000（5000）&#125;）def Test_OrderedDict（）：randomNumber = random.randint（0，5000）如果OrderedDict_Test.keys（）中的随机数：返回假t = timeit.repeat（stmt =“ Create_List（）”，编号= 50，setup =“ from __main__ import Create_List”，repeat = 15）print（“ Create_List的时间：&#123;&#125;”。格式（sum（t ）/ len（t））t = timeit.repeat（stmt =“ Create_Tuple（）”，数字= 50，setup =“ from __main__ import Create_Tuple”，重复= 15）print（“ Create_Tuple的时间：&#123;&#125;”。 t）/ len（t））t = timeit.repeat（stmt =“ Create_Set（）”，数字= 50，setup =“ from __main__ import Create_Set”，重复= 15）print（“ Create_Set的时间：&#123;&#125;（格式） （sum（t）/ len（t））t = timeit.repeat（stmt =“ Create_Dict（）”，数字= 50，setup =“ from __main__ import Create_Dict”，重复= 15）print（“ Cre ate_ Di ct的时间：&#123;&#125;”。格式（sum（t）/ len（t）））</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">t = timeit.repeat（stmt =“ Create_OrderedDict（）”，数字= 50，设置=“ from __main__ import Create_OrderedDict”，重复= 15）</span><br><span class="line">print（“ Create_OrderedDict的时间：&#123;&#125;”。格式（sum（t）/ len （t））打印（“ \ n”）t = timeit.repeat（stmt =“ Test_List（）”，），number = 15，setup =“ from __main__ import Test_List”，重复= 15）print（“ Test_List&apos;时间：（&#123;&#125;”。格式（sum（t）/ len（t））t = timeit.repeat（stmt =“ Test_Tuple（）”，编号= 15，设置=“ from __main__ import Test_Tuple”，重复= 15）打印（格式（sum（t）/ len（t））t = timeit。重复（stmt =“ Test_Set（）”，编号= 15，设置=“来自__main__ import Test_Set”，重复= 15）print（“ Test_Set的时间：&#123;&#125;”。格式（sum（t）/ len（t））t = timeit.repeat（stmt =“ Test_Dict（）”，数字= 15，setup =“ from __main__ import Test_Dict”，重复= 15）打印（“ Test_Dict格式（sum（t）/ len）吨）））T = timeit.repeat（语句=“Test_OrderedDict（）”，数字= 15，设置=“来自__main__进口Test_OrderedDict”，重复= 15）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">打印（“ Test_OrderedDict时间：&#123;&#125;”。格式（sum（t）/ len（t））print（“ \ nThe end”）```结果如下：```列表的大小是：45112集的大小是： 524512元组的大小是：40048字典的大小是：147560分类的字典的大小是：373160现在是测试速度Create_List的时间：0.006335740000000042 0.010433759999999988：Create_Tuple的时间0.013531839999999977：Create_Set的时间0.011174999999999964：Create_Dict的时间0.04272052666666668：Create_OrderedDict的时间0.0003235733333334008：Test_List的时间Test_Tuple的时间：0.00032904666666671765的测试时间：1.814666666666298e-05 Test_Dict时间：1.924666666669831e-05 Test_OrderedDict时间：2.128666666673477e-05完成```内存消耗：`&apos;&apos;尺寸：组&lt;列表译通&lt;OrderedDict &lt;设置```创建速度比较：``    时间的创建：列表&lt;组&lt;快译通&lt;集&lt;OrderedDict```发现速度比较（妈也集合和字典寻找真几把快）：</span><br></pre></td></tr></table></figure>
-<p>搜索的时间：快译通≈设置≈OrderedDict &lt;&lt;元组≈列表＃&lt;&lt;大概快了5K多倍<code>`</code></p>
-<p>效率最高预算：</p>
-<p>~~ 需要索引+需要修改+需要重复元素=列表清单~~ ~~ 需要索引+不需要修改+需要重复元素=元组Tuple ~~ ~~ 不需要索引（与顺序无关）+需要修改+不需要重复=集合Set ~~ ~~ 不需要索引（与顺序无关）+不需要修改+不需要重复=冻结集合frozenSet ~~</p>
-<p>个人注释：就速度而言，全都使用字典是最好的（注：在Python3中，字典自带顺序，但不推荐用）。除非是不需要重复的值，就可以使用Set，其他的都别用了，或者不想修改的可以考虑用下冻结集。</p>
-<p>另附问题链接：[ <a href="https://stackoverflow.com/questions/60744667/speed-test-among-set-list-and-tuple-in-python-gives-surprising-results" target="_blank" rel="noopener">https://stackoverflow.com/questions/60744667/speed-test-among-set-list-and-tuple-in-python-gives-surprising-results</a> ]（<a href="https://stackoverflow.com" target="_blank" rel="noopener">https://stackoverflow.com</a> / questions / 60744667 /在设置列表和元组中的速度测试中，python-gives-surprising-results结果）</p>
+<p>搜索的时间：快译通≈设置≈OrderedDict &lt;&lt;元组≈列表＃&lt;&lt;大概快了5K多倍<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">效率最高预算：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">~~ 需要索引+需要修改+需要重复元素=列表清单~~ ~~ 需要索引+不需要修改+需要重复元素=元组Tuple ~~ ~~ 不需要索引（与顺序无关）+需要修改+不需要重复=集合Set ~~ ~~ 不需要索引（与顺序无关）+不需要修改+不需要重复=冻结集合frozenSet ~~</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">个人注释：就速度而言，全都使用字典是最好的（注：在Python3中，字典自带顺序，但不推荐用）。除非是不需要重复的值，就可以使用Set，其他的都别用了，或者不想修改的可以考虑用下冻结集。</span><br><span class="line"></span><br><span class="line">另附问题链接：[ https://stackoverflow.com/questions/60744667/speed-test-among-set-list-and-tuple-in-python-gives-surprising-results ]（https://stackoverflow.com / questions / 60744667 /在设置列表和元组中的速度测试中，python-gives-surprising-results结果）</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -481,6 +491,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+          
+        </div>
+      
 
       
       
@@ -500,8 +516,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/03/24/利用pandas 和 ttk.Treeviews制作xlsx视图工具/" rel="prev" title>
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/03/24/利用pandas 和 ttk.Treeviews制作xlsx视图工具/" rel="prev" title="利用pandas库和ttk.Treeviews制作xlxs视图工具">
+                利用pandas库和ttk.Treeviews制作xlxs视图工具 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -603,7 +619,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
